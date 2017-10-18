@@ -1,0 +1,9 @@
+{
+"type": "FeatureCollection",
+"crs": { "type": "name", "properties": { "name": "urn:ogc:def:crs:OGC:1.3:CRS84" } },
+"features": [
+{ "type": "Feature", "properties": { "granuleName": "S1B_IW_SLC__1SSV_20170418T141141_20170418T141208_005216_009207_49A1", "downloadUrl": "https:\/\/datapool.asf.alaska.edu\/SLC\/SB\/S1B_IW_SLC__1SSV_20170418T141141_20170418T141208_005216_009207_49A1.zip" }, "geometry": { "type": "Polygon", "coordinates": [ [ [ -118.2165, 50.4723 ], [ -121.7415, 50.8645 ], [ -122.125, 49.2505 ], [ -118.7182, 48.8601 ], [ -118.2165, 50.4723 ] ] ] } },
+{ "type": "Feature", "properties": { "granuleName": "S1B_IW_SLC__1SSV_20170418T141206_20170418T141233_005216_009207_FD07", "downloadUrl": "https:\/\/datapool.asf.alaska.edu\/SLC\/SB\/S1B_IW_SLC__1SSV_20170418T141206_20170418T141233_005216_009207_FD07.zip" }, "geometry": { "type": "Polygon", "coordinates": [ [ [ -118.6681, 48.9864 ], [ -122.0884, 49.3777 ], [ -122.4624, 47.7631 ], [ -119.1514, 47.3731 ], [ -118.6681, 48.9864 ] ] ] } },
+{ "type": "Feature", "properties": { "granuleName": "S1B_IW_SLC__1SSV_20170418T141231_20170418T141257_005216_009207_0D60", "downloadUrl": "https:\/\/datapool.asf.alaska.edu\/SLC\/SB\/S1B_IW_SLC__1SSV_20170418T141231_20170418T141257_005216_009207_0D60.zip" }, "geometry": { "type": "Polygon", "coordinates": [ [ [ -119.1083, 47.5001 ], [ -122.4299, 47.8906 ], [ -122.7845, 46.3243 ], [ -119.561, 45.9346 ], [ -119.1083, 47.5001 ] ] ] } }
+]
+}

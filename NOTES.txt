@@ -1,0 +1,12 @@
+# Some notes on various processing steps.
+
+##1) Merge two intersecting polygons (oregon + washington)
+# NOTE: creates MultiPolygon file
+fio cat oregon/oregon.shp washington/washington.shp | fio collect > merged.json
+
+fio cat oregon/oregon.shp washington/washington.shp | fio load --format Shapefile merged.shp
+
+
+##2) To create a single merged polygon:
+./merge_polygons.py oregon/oregon.shp washington/washington.shp
+
