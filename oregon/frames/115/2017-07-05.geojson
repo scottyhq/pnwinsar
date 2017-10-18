@@ -1,0 +1,9 @@
+{
+"type": "FeatureCollection",
+"crs": { "type": "name", "properties": { "name": "urn:ogc:def:crs:OGC:1.3:CRS84" } },
+"features": [
+{ "type": "Feature", "properties": { "granuleName": "S1A_IW_SLC__1SDV_20170705T141343_20170705T141413_017337_01CF2D_BBA1" }, "geometry": { "type": "Polygon", "coordinates": [ [ [ -119.5298, 45.8994 ], [ -122.7751, 46.2927 ], [ -123.1707, 44.5039 ], [ -120.0288, 44.1109 ], [ -119.5298, 45.8994 ] ] ] } },
+{ "type": "Feature", "properties": { "granuleName": "S1A_IW_SLC__1SDV_20170705T141411_20170705T141439_017337_01CF2D_E849" }, "geometry": { "type": "Polygon", "coordinates": [ [ [ -120.0024, 44.2475 ], [ -123.1474, 44.6396 ], [ -123.5098, 42.966 ], [ -120.4539, 42.5738 ], [ -120.0024, 44.2475 ] ] ] } },
+{ "type": "Feature", "properties": { "granuleName": "S1A_IW_SLC__1SDV_20170705T141437_20170705T141504_017337_01CF2D_BC4B" }, "geometry": { "type": "Polygon", "coordinates": [ [ [ -120.4197, 42.702 ], [ -123.4823, 43.0942 ], [ -123.8266, 41.4766 ], [ -120.8437, 41.0839 ], [ -120.4197, 42.702 ] ] ] } }
+]
+}

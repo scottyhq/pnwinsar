@@ -1,0 +1,7 @@
+{
+"type": "FeatureCollection",
+"crs": { "type": "name", "properties": { "name": "urn:ogc:def:crs:OGC:1.3:CRS84" } },
+"features": [
+{ "type": "Feature", "properties": { "granuleName": "S1A_IW_SLC__1SDV_20160717T020938_20160717T021007_012182_012E55_E828" }, "geometry": { "type": "Polygon", "coordinates": [ [ [ -126.1973, 46.7278 ], [ -125.6901, 44.9397 ], [ -122.5334, 45.3286 ], [ -122.9337, 47.1174 ], [ -126.1973, 46.7278 ] ] ] } }
+]
+}
