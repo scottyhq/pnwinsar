@@ -1,0 +1,39 @@
+Downloading SAR scenes from ASF seems to go to AWS S3...
+is it possible to just "connect S3 bucket" rather than downloading?
+===================
+
+(py36) [scottyh@rainier test]$ prep_topsApp.py -i query.geojson -m 20170927 -s 20170915
+Looking for environment variables POEORB, AUXCAL, DEMDB...
+Requires ~/.netrc file:  
+https://winsar.unavco.org/software/release_note_isce-2.1.0.txt
+wget -nc -c https://datapool.asf.alaska.edu/SLC/SA/S1A_IW_SLC__1SDV_20170927T141347_20170927T141417_018562_01F492_5FFA.zip
+--2017-10-24 14:48:50--  https://datapool.asf.alaska.edu/SLC/SA/S1A_IW_SLC__1SDV_20170927T141347_20170927T141417_018562_01F492_5FFA.zip
+Resolving datapool.asf.alaska.edu... 137.229.87.137
+Connecting to datapool.asf.alaska.edu|137.229.87.137|:443... connected.
+HTTP request sent, awaiting response... 302 Found
+Location: https://urs.earthdata.nasa.gov/oauth/authorize?client_id=BO_n7nTIlMljdvU6kRRB3g&redirect_uri=https://vertex.daac.asf.alaska.edu/services/urs4_token_request&response_type=code&state=redirect%3Ahttps%3A%2F%2Fdatapool.asf.alaska.edu%3A443%2FSLC%2FSA%2FS1A_IW_SLC__1SDV_20170927T141347_20170927T141417_018562_01F492_5FFA.zip&app_type=401 [following]
+--2017-10-24 14:48:50--  https://urs.earthdata.nasa.gov/oauth/authorize?client_id=BO_n7nTIlMljdvU6kRRB3g&redirect_uri=https://vertex.daac.asf.alaska.edu/services/urs4_token_request&response_type=code&state=redirect%3Ahttps%3A%2F%2Fdatapool.asf.alaska.edu%3A443%2FSLC%2FSA%2FS1A_IW_SLC__1SDV_20170927T141347_20170927T141417_018562_01F492_5FFA.zip&app_type=401
+Resolving urs.earthdata.nasa.gov... 198.118.243.33, 2001:4d0:241a:4081::89
+Connecting to urs.earthdata.nasa.gov|198.118.243.33|:443... connected.
+HTTP request sent, awaiting response... 401 Unauthorized
+Connecting to urs.earthdata.nasa.gov|198.118.243.33|:443... connected.
+HTTP request sent, awaiting response... 302 Found
+Location: https://vertex.daac.asf.alaska.edu/services/urs4_token_request?code=e30df316e404568e446f0068e5ff904e8960058d1eb8d999ef39ddd8ed1bb919&state=redirect%3Ahttps%3A%2F%2Fdatapool%2Easf%2Ealaska%2Eedu%3A443%2FSLC%2FSA%2FS1A_IW_SLC__1SDV_20170927T141347_20170927T141417_018562_01F492_5FFA%2Ezip [following]
+--2017-10-24 14:48:52--  https://vertex.daac.asf.alaska.edu/services/urs4_token_request?code=e30df316e404568e446f0068e5ff904e8960058d1eb8d999ef39ddd8ed1bb919&state=redirect%3Ahttps%3A%2F%2Fdatapool%2Easf%2Ealaska%2Eedu%3A443%2FSLC%2FSA%2FS1A_IW_SLC__1SDV_20170927T141347_20170927T141417_018562_01F492_5FFA%2Ezip
+Resolving vertex.daac.asf.alaska.edu... 137.229.86.197
+Connecting to vertex.daac.asf.alaska.edu|137.229.86.197|:443... connected.
+HTTP request sent, awaiting response... 302 Found
+Location: https://datapool.asf.alaska.edu:443/SLC/SA/S1A_IW_SLC__1SDV_20170927T141347_20170927T141417_018562_01F492_5FFA.zip [following]
+--2017-10-24 14:48:53--  https://datapool.asf.alaska.edu/SLC/SA/S1A_IW_SLC__1SDV_20170927T141347_20170927T141417_018562_01F492_5FFA.zip
+Connecting to datapool.asf.alaska.edu|137.229.87.137|:443... connected.
+HTTP request sent, awaiting response... 307 Temporary Redirect
+Location: https://gsfc-ngap-p-d72c09e1-2d17-5303-b611-b9600db83e8b.s3.amazonaws.com/S1A_IW_SLC__1SDV_20170927T141347_20170927T141417_018562_01F492_5FFA.zip?AWSAccessKeyId=AKIAJ2F6ERO2DFXZ7PUQ&Signature=KLZEvpjHoY0HYcZ2vRh%2BOaXismw%3D&Expires=1508924934&userid=scottyhq [following]
+--2017-10-24 14:48:54--  https://gsfc-ngap-p-d72c09e1-2d17-5303-b611-b9600db83e8b.s3.amazonaws.com/S1A_IW_SLC__1SDV_20170927T141347_20170927T141417_018562_01F492_5FFA.zip?AWSAccessKeyId=AKIAJ2F6ERO2DFXZ7PUQ&Signature=KLZEvpjHoY0HYcZ2vRh%2BOaXismw%3D&Expires=1508924934&userid=scottyhq
+Resolving gsfc-ngap-p-d72c09e1-2d17-5303-b611-b9600db83e8b.s3.amazonaws.com... 52.216.227.64
+Connecting to gsfc-ngap-p-d72c09e1-2d17-5303-b611-b9600db83e8b.s3.amazonaws.com|52.216.227.64|:443... connected.
+HTTP request sent, awaiting response... 200 OK
+Length: 5082259094 (4.7G) [application/zip]
+Saving to: “S1A_IW_SLC__1SDV_20170927T141347_20170927T141417_018562_01F492_5FFA.zip”
+
+83% [==========================================================================>       
+
