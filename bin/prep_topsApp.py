@@ -55,9 +55,10 @@ def download_scene(downloadUrl):
     '''
     aria2c --http-auth-challenge=true --http-user=CHANGE_ME --http-passwd='CHANGE_ME' "https://api.daac.asf.alaska.edu/services/search/param?granule_list=S1A_EW_GRDM_1SDH_20151003T040339_20151003T040351_007983_00B2A6_7377&output=metalink"
     '''
+    print('Downloading frame from ASF...')
     print('Requires ~/.netrc file:  ')
     print('https://winsar.unavco.org/software/release_note_isce-2.1.0.txt')
-    cmd = 'wget -nc -c {}'.format() #nc won't overwrite. -c continuous if unfinished
+    cmd = 'wget -nc -c {}'.format(downloadUrl) #nc won't overwrite. -c continuous if unfinished
     print(cmd)
     os.system(cmd)
 
