@@ -82,6 +82,8 @@ def download_orbit(granuleName):
     '''
     Grab orbit files from ASF
     '''
+    cwd = os.getcwd()
+    os.chdir(os.environ['POEORB'])
     sat = granuleName[:3]
     date = granuleName[17:25]
     print('downloading orbit for {}, {}'.format(sat,date))
@@ -101,6 +103,7 @@ def download_orbit(granuleName):
     cmd = 'wget -nc {}/{}'.format(url,match) #-nc means no clobber
     print(cmd)
     os.system(cmd)
+    os.chdir(cwd)
 
 
 def download_auxcal():
@@ -108,11 +111,14 @@ def download_auxcal():
     Auxilary data files <20Mb, just download all of them!
     NOTE: probably can be simplified! see download_orbit
     '''
+    cwd = os.getcwd()
+    os.chdir(cwd)
     print('Downloading S1 AUXILARY DATA...')
     url = 'https://s1qc.asf.alaska.edu/aux_cal'
     cmd = 'wget -r -l2 -nc -nd -np -nH -A SAFE {}'.format(url)
     print(cmd)
     os.system(cmd)
+    os.chdir(cwd)
 
 
 def find_scenes(gf, dateStr, download=True):
