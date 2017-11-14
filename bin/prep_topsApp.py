@@ -112,7 +112,7 @@ def download_auxcal():
     NOTE: probably can be simplified! see download_orbit
     '''
     cwd = os.getcwd()
-    os.chdir(cwd)
+    os.chdir(os.environ['AUXCAL'])
     print('Downloading S1 AUXILARY DATA...')
     url = 'https://s1qc.asf.alaska.edu/aux_cal'
     cmd = 'wget -r -l2 -nc -nd -np -nH -A SAFE {}'.format(url)
