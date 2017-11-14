@@ -25,9 +25,9 @@ def cmdLineParse():
     '''
     Command line parser.
     '''
-    parser = argparse.ArgumentParser( description='prep topsApp.py')
+    parser = argparse.ArgumentParser( description='prepare ISCE 2.1 topsApp.py')
     parser.add_argument('-i', type=str, dest='inventory', required=True,
-            help='Geojson inventory file')
+            help='Inventory vector file (query.geojson)')
     parser.add_argument('-m', type=str, dest='master', required=True,
             help='Master date')
     parser.add_argument('-s', type=str, dest='slave', required=True,
@@ -41,6 +41,8 @@ def cmdLineParse():
     parser.add_argument('-a', type=str, dest='auxdir', required=False,
             default=os.environ['AUXCAL'],
             help='Auxilary file directory')
+    parser.add_argument('-d', type=str, dest='dem', required=False,
+            help='Path to DEM file')
     parser.add_argument('-r', type=float, nargs=4, dest='roi', required=False,
             metavar=('S','N','W','E'),
 	        help='Region of interest bbox [S,N,W,E]')
@@ -101,6 +103,18 @@ def download_orbit(granuleName):
     os.system(cmd)
 
 
+def download_auxcal():
+    '''
+    Auxilary data files <20Mb, just download all of them!
+    NOTE: probably can be simplified! see download_orbit
+    '''
+    print('Downloading S1 AUXILARY DATA...')
+    url = 'https://s1qc.asf.alaska.edu/aux_cal'
+    cmd = 'wget -r -l2 -nc -nd -np -nH -A SAFE {}'.format(url)
+    print(cmd)
+    os.system(cmd)
+
+
 def find_scenes(gf, dateStr, download=True):
     '''
     Get downloadUrls for a given date
@@ -109,14 +123,14 @@ def find_scenes(gf, dateStr, download=True):
 
     if download:
         for i,row in GF.iterrows():
-            download_scene(row.granuleName)
+            download_scene(row.downloadUrl)
         download_orbit(GF.granuleName.iloc[0])
 
     filenames = GF.fileName.tolist()
     # create symlinks #probably need to do this for multiple
     #for f in filenames:
     #    os.symlink(f, os.path.basename(f))
-    #return filenames
+    return filenames
 
 
 def write_topsApp_xml(inps):
@@ -166,8 +180,10 @@ if __name__ == '__main__':
     inps = cmdLineParse()
     gf = load_inventory(inps.inventory)
     intdir = 'int_{0}_{1}'.format(inps.master, inps.slave)
-    os.mkdir(intdir)
+    if not os.path.isdir(intdir):
+        os.mkdir(intdir)
     os.chdir(intdir)
+    download_auxcal()
     inps.master_scenes = find_scenes(gf, inps.master, True)
     inps.slave_scenes = find_scenes(gf, inps.slave, True)
     write_topsApp_xml(inps)
