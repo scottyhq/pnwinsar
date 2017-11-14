@@ -26,12 +26,14 @@ def cmdLineParse():
     Command line parser.
     '''
     parser = argparse.ArgumentParser( description='prep topsApp.py')
+    parser.add_argument('-i', type=str, dest='inventory', required=True,
+            help='Geojson inventory file')
     parser.add_argument('-m', type=str, dest='master', required=True,
             help='Master date')
     parser.add_argument('-s', type=str, dest='slave', required=True,
             help='Slave date')
     parser.add_argument('-n', type=int, nargs='+', dest='swaths', required=False,
-	    default=[1,2,3], choices=(1,2,3),
+	        default=[1,2,3], choices=(1,2,3),
             help='Subswath numbers to process')
     parser.add_argument('-o', type=str, dest='orbitdir', required=False,
             default=os.environ['POEORB'],
@@ -41,10 +43,10 @@ def cmdLineParse():
             help='Auxilary file directory')
     parser.add_argument('-r', type=float, nargs=4, dest='roi', required=False,
             metavar=('S','N','W','E'),
-	    help='Region of interest bbox [S,N,W,E]')
+	        help='Region of interest bbox [S,N,W,E]')
     parser.add_argument('-g', type=float, nargs=4, dest='gbox', required=False,
             metavar=('S','N','W','E'),
-	    help='Geocode bbox [S,N,W,E]')
+	        help='Geocode bbox [S,N,W,E]')
 
     return parser.parse_args()
 
@@ -161,8 +163,7 @@ if __name__ == '__main__':
         os.environ['AUXCAL'] = './'
 
     inps = cmdLineParse()
-    #print(inps)
-
+    gf = load_inventory(inps.inventory)
     intdir = 'int_{0}_{1}'.format(inps.master, inps.slave)
     os.mkdir(intdir)
     os.chdir(intdir)
