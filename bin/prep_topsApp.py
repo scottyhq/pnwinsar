@@ -32,6 +32,8 @@ def cmdLineParse():
             help='Master date')
     parser.add_argument('-s', type=str, dest='slave', required=True,
             help='Slave date')
+    parser.add_argument('-p', type=int, dest='path', required=True,
+            help='Path/Track/RelativeOrbit Number')
     parser.add_argument('-n', type=int, nargs='+', dest='swaths', required=False,
 	        default=[1,2,3], choices=(1,2,3),
             help='Subswath numbers to process')
@@ -59,7 +61,7 @@ def download_scene(downloadUrl):
     '''
     print('Downloading frame from ASF...')
     print('Requires ~/.netrc file:  ')
-    print('https://winsar.unavco.org/software/release_note_isce-2.1.0.txt')
+    print('See: https://winsar.unavco.org/software/release_note_isce-2.1.0.txt')
     cmd = 'wget -nc -c {}'.format(downloadUrl) #nc won't overwrite. -c continuous if unfinished
     print(cmd)
     os.system(cmd)
@@ -121,10 +123,11 @@ def download_auxcal():
     os.chdir(cwd)
 
 
-def find_scenes(gf, dateStr, download=True):
+def find_scenes(gf, dateStr, relativeOrbit, download=True):
     '''
     Get downloadUrls for a given date
     '''
+    GF = gf.query('relativeOrbit == @relativeOrbit')
     GF = gf.loc[ gf.dateStamp == dateStr ]
 
     if download:
@@ -133,6 +136,7 @@ def find_scenes(gf, dateStr, download=True):
         download_orbit(GF.granuleName.iloc[0])
 
     filenames = GF.fileName.tolist()
+    print('SCENES: ', filenames)
     # create symlinks #probably need to do this for multiple
     #for f in filenames:
     #    os.symlink(f, os.path.basename(f))
@@ -190,7 +194,7 @@ if __name__ == '__main__':
         os.mkdir(intdir)
     os.chdir(intdir)
     download_auxcal()
-    inps.master_scenes = find_scenes(gf, inps.master, True)
-    inps.slave_scenes = find_scenes(gf, inps.slave, True)
+    inps.master_scenes = find_scenes(gf, inps.master, inps.path, download=True)
+    inps.slave_scenes = find_scenes(gf, inps.slave, inps.path, download=True)
     write_topsApp_xml(inps)
     print('Ready to run topsApp.py in {}'.format(intdir))

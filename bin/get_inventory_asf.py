@@ -32,6 +32,8 @@ def cmdLineParse():
             help='Polygon vector file defining region of interest')
     parser.add_argument('-b', type=float, dest='buffer', required=False,
             help='Add buffer [in degrees]')
+    parser.add_argument('-f', action='store_true', default=False, dest='footprints', required=False,
+            help='Create subfolders with geojson footprints')
 
     return parser.parse_args()
 
@@ -225,5 +227,6 @@ if __name__ == '__main__':
     gf = merge_inventories('query_S1A.json', 'query_S1B.json')
     summarize_inventory(gf)
     summarize_orbits(gf)
-    save_geojson_footprints(gf) #NOTE: takes a while...
     save_inventory(gf)
+    if args.footprints:
+	save_geojson_footprints(gf) #NOTE: takes a while...
