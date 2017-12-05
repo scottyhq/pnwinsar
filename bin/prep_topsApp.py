@@ -55,6 +55,7 @@ def cmdLineParse():
     return parser.parse_args()
 
 
+
 def download_scene(downloadUrl):
     '''
     aria2c --http-auth-challenge=true --http-user=CHANGE_ME --http-passwd='CHANGE_ME' "https://api.daac.asf.alaska.edu/services/search/param?granule_list=S1A_EW_GRDM_1SDH_20151003T040339_20151003T040351_007983_00B2A6_7377&output=metalink"
